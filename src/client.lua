@@ -40,8 +40,9 @@ RegisterNUICallback("selectSkin", function(data, cb)
             Citizen.Wait(0)
         end
         SetPlayerModel(PlayerId(), skin)
-		Wait(2000)
-		SetEntityMaxHealth(PlayerPedId(), health)
+		Wait(1000)
+		SetEntityMaxHealth(PlayerPedId(), 400)
+		SetEntityHealth(PlayerPedId(), health)
 		TriggerEvent("Notify","sucesso","Skin definida com sucesso!")
 	end
 	cb(code)
