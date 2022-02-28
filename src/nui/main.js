@@ -22,7 +22,7 @@ $("#selectSkin-button").on("click", () => {
 
 	var skins = [];
 	$(".skin-active").each(function () {
-		skins.push($(this).data("skin"));
+		skins.push($(this).data("skinmodel"));
 	});
 
 	if (skins.length < 1) {
@@ -49,11 +49,12 @@ $("#skinList").on("click", ".skin", function () {
 	if (blockSelect) return;
 
 	$(".skin-active").toggleClass("skin-active", false);
-	$(this).toggleClass("skin-active");
+	$(this).toggleClass("skin-active", true);
 });
 
 function retrieveSkins() {
-	$.post(`http://${GetParentResourceName()}/getAvailableSkins`, JSON.stringify({ code }), (data) => {
+	$("#skinList").html("");
+	$.post(`http://${GetParentResourceName()}/getAvailableSkins`, JSON.stringify({}), (data) => {
 		for (var skin of data.skins) {
 			$("#skinList").append(`
 				<div class="skin card mb-3" style="width: 540px; height: 100px;" data-skinmodel="${skin.model}">

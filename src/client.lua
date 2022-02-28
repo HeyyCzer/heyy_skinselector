@@ -30,11 +30,17 @@ function ToggleActionMenu()
 end
 
 RegisterNUICallback("selectSkin", function(data, cb)
-	local code = heyyServer.selectSkin(data.skin)
+	local skin = data.skin
+	local code = heyyServer.selectSkin(skin)
 	if code == 200 then
-		SetPlayerModel(PlayerId(), GetHashKey(data.skin))
+		RequestModel(skin)
+        while not HasModelLoaded(skin) do
+            Citizen.Wait(0)
+        end
+        SetPlayerModel(PlayerId(), skin)
+		TriggerEvent("Notify","sucesso","Skin definida com sucesso!")
 	end
-	cb()
+	cb(code)
 end)
 
 RegisterNUICallback("notify", function(data, cb)

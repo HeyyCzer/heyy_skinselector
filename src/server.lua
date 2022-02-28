@@ -5,10 +5,15 @@ local vRPclient = Tunnel.getInterface("vRP")
 local heyy = {}
 Tunnel.bindInterface("heyy_vipcode",heyy)
 
+local cooldown = {}
+
 function heyy.checkPermission()
 	local source = source
 	local user_id = vRP.getUserId(source)
-	if vRP.hasPermission(user_id, "crianca.permissao") then
+	if vRP.hasPermission(user_id, "manager.permissao") then
+		if cooldown[user_id] and os.time() - cooldown[user_id] < 600 then
+			TriggerClientEvent("Notify",source,"negado","Você precisa aguardar <b>" .. segundos .. " segundos</b> para utilizar isto novamente.")
+		end
 		return true
 	end
 	TriggerClientEvent("Notify",source,"negado","Você não tem permissão para executar este comando!<br/>Você pode <b>adquirir este acesso</b> através do site")
@@ -18,7 +23,7 @@ end
 function heyy.selectSkin(selectedSkin)
 	local source = source
 	local user_id = vRP.getUserId(source)
-	if vRP.hasPermission(user_id, "crianca.permissao") then
+	if vRP.hasPermission(user_id, "manager.permissao") then
 		if selectedSkin then
 			local contagem = {}
 			local skin

@@ -28,8 +28,8 @@
     border-radius: 7px;
 }
 
-.container-vip .container-content .container-body h2 {
-    font-size: 18px;
+.container-vip .container-content .container-body h5 {
+    color: rgb(206, 206, 206);
 }
 
 .container-vip .container-content .container-body p {
@@ -80,4 +80,8 @@
 
 ::placeholder { /* Recent browsers */
     text-transform: none;
+}
+
+.card {
+	background-color: #202020 !important;
 }
