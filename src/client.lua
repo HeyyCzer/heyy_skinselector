@@ -33,11 +33,14 @@ RegisterNUICallback("selectSkin", function(data, cb)
 	local skin = data.skin
 	local code = heyyServer.selectSkin(skin)
 	if code == 200 then
+		local health = GetEntityHealth(PlayerPedId())
+
 		RequestModel(skin)
         while not HasModelLoaded(skin) do
             Citizen.Wait(0)
         end
         SetPlayerModel(PlayerId(), skin)
+		SetEntityMaxHealth(PlayerPedId(), health)
 		TriggerEvent("Notify","sucesso","Skin definida com sucesso!")
 	end
 	cb(code)
