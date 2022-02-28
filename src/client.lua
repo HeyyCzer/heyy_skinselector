@@ -62,3 +62,7 @@ RegisterCommand('skin',function(source,args,rawCommand)
 		ToggleActionMenu()
 	end
 end)
+
+Citizen.CreateThread(function()
+	print("Sistema iniciado com sucesso!")
+end)

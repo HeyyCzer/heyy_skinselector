@@ -73,3 +73,7 @@ function sendInvalidSelectionLog(user_id, skinName)
 	}
 	PerformHttpRequest('https://canary.discord.com/api/webhooks/947924251283959818/TTg2hMfeeyRcB6fAj3m0IyNOWix-PqAAWX02Jdo1LV4_MeVxYpnbZAyk0OdX776hmjkA', function(err, text, headers) end, 'POST', json.encode({ embeds = embed}), { ['Content-Type'] = 'application/json' })
 end
+
+Citizen.CreateThread(function()
+	print("^2[heyy_skinselector] ^7Sistema iniciado com sucesso!")
+end)
