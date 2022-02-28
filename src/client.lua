@@ -48,7 +48,7 @@ RegisterNUICallback("notify", function(data, cb)
 end)
 
 RegisterNUICallback("getAvailableSkins", function(data, cb)
-	cb({skins = skins})
+	cb({skins = Config.skins})
 end)
 
 -- fechar

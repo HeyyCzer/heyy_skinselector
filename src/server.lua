@@ -10,8 +10,9 @@ local cooldown = {}
 function heyy.checkPermission()
 	local source = source
 	local user_id = vRP.getUserId(source)
-	if vRP.hasPermission(user_id, "manager.permissao") then
+	if vRP.hasPermission(user_id, Config.permission) then
 		if cooldown[user_id] and os.time() - cooldown[user_id] < 600 then
+			local segundos = 600 - (os.time() - cooldown[user_id])
 			TriggerClientEvent("Notify",source,"negado","Você precisa aguardar <b>" .. segundos .. " segundos</b> para utilizar isto novamente.")
 		end
 		return true
@@ -23,11 +24,11 @@ end
 function heyy.selectSkin(selectedSkin)
 	local source = source
 	local user_id = vRP.getUserId(source)
-	if vRP.hasPermission(user_id, "manager.permissao") then
+	if vRP.hasPermission(user_id, Config.permission) then
 		if selectedSkin then
 			local contagem = {}
 			local skin
-			for _, skinData in pairs(skins) do
+			for _, skinData in pairs(Config.skins) do
 				if skinData.model == selectedSkin then
 					skin = skinData
 					break
@@ -59,7 +60,7 @@ function sendSkinSelectedLog(user_id, skinData)
 			},
 		}
 	}
-	PerformHttpRequest('https://canary.discord.com/api/webhooks/947924251283959818/TTg2hMfeeyRcB6fAj3m0IyNOWix-PqAAWX02Jdo1LV4_MeVxYpnbZAyk0OdX776hmjkA', function(err, text, headers) end, 'POST', json.encode({ embeds = embed}), { ['Content-Type'] = 'application/json' })
+	PerformHttpRequest(Config.webhook, function(err, text, headers) end, 'POST', json.encode({ embeds = embed}), { ['Content-Type'] = 'application/json' })
 end
 function sendInvalidSelectionLog(user_id, skinName)
 	local embed = {
@@ -71,7 +72,7 @@ function sendInvalidSelectionLog(user_id, skinName)
 			"\n**Skin selecionada:** " .. skinName,
 		}
 	}
-	PerformHttpRequest('https://canary.discord.com/api/webhooks/947924251283959818/TTg2hMfeeyRcB6fAj3m0IyNOWix-PqAAWX02Jdo1LV4_MeVxYpnbZAyk0OdX776hmjkA', function(err, text, headers) end, 'POST', json.encode({ embeds = embed}), { ['Content-Type'] = 'application/json' })
+	PerformHttpRequest(Config.webhook, function(err, text, headers) end, 'POST', json.encode({ embeds = embed}), { ['Content-Type'] = 'application/json' })
 end
 
 Citizen.CreateThread(function()
